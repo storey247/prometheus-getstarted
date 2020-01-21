@@ -13,6 +13,6 @@ COPY . .
 # Build
 RUN go build -o main .
 
-EXPOSE 2112
+EXPOSE 8080
 
 CMD ["./main"]

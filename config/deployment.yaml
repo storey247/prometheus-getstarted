@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-prometheus
+spec:
+  selector:
+    matchLabels:
+      app: hello-prometheus
+  template:
+    metadata:
+      labels:
+        app: hello-prometheus
+    spec:
+      containers:
+        - name: hello-prometheus
+          image: hello-prometheus:1
+          ports:
+            - containerPort: 8080
+              name: hello
