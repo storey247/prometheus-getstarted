@@ -1,7 +1,13 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: test
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: hello-prometheus
+  namespace: test
 spec:
   selector:
     matchLabels:
@@ -17,3 +23,20 @@ spec:
           ports:
             - containerPort: 8080
               name: hello
+---
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: hello-prometheus
+    namespace: test
+    labels:
+      app: hello-prometheus
+  spec:
+    type: NodePort
+    ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+      name: http
+    selector:
+      app: hello-prometheus
